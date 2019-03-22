@@ -12,9 +12,11 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback"
     },
-    accessToken => {
+    (accessToken, refreshToken, profile, done) => {
       // eslint-disable-next-line no-console
-      console.log(accessToken);
+      console.log("accessToken", accessToken);
+      console.log("refreshToken", refreshToken);
+      console.log("profile", profile);
     }
   )
 );
