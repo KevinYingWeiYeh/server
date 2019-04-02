@@ -23,19 +23,16 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          // We don't save userId if the Id is already excisting
-          // eslint-disable-next-line no-console
-          console.log(`the user ${profile.displayName} is already excisting`);
-          done(null, existingUser);
-        } else {
-          new User({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user));
-        }
-      });
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id })
+
+      if (existingUser) {
+        // eslint-disable-next-line no-console
+        console.log(`the user ${profile.displayName} is already excisting`);
+        return done(null, existingUser);
+      }
+      const user = await new User({ googleId: profile.id }).save()
+      done(null, user);
     }
   )
 );
