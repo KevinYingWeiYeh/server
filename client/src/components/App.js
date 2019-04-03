@@ -10,8 +10,8 @@ const Dashboard = () => <h2> Dashboard </h2>;
 const SurveryNew = () => <h2> SurveryNew </h2>;
 
 class App extends React.Component {
-  componentDidMount() {
-    console.log(this.props);
+  componentWillMount() {
+    console.log("did mount", this.props);
     this.props.fetchUser();
   }
 
