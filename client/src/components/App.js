@@ -11,7 +11,6 @@ const SurveryNew = () => <h2> SurveryNew </h2>;
 
 class App extends React.Component {
   componentWillMount() {
-    console.log("did mount", this.props);
     this.props.fetchUser();
   }
 
