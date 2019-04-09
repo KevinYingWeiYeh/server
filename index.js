@@ -27,7 +27,7 @@ app.use(passport.session());
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
 
-if (process.env.Node_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   //if express un production mode and couldn't find cliend/build file
   const path = require("path");
